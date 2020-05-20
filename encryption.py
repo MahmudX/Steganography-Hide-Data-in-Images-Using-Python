@@ -2,29 +2,25 @@ from PIL import Image
 import numpy as np
 
 def encrypt_pixel(img, byte_array):
-    c=-1
-
-    for pix in img:
-        c += 1
-        try:
-                #print(img[c])
-                if byte_array[c] == '1':
-                    # even
-                    if img[c] % 2 == 0:
-                        img[c] -= 1
-                elif byte_array[c] == '0':
-                    # odd
-                    if img[c] % 2 != 0:
-                        img[c] -= 1
-                elif byte_array[c] == ' ':
-                    if img[c] % 2 != 0:
-                        img[c] -= 1
-                #print(img[c],byte_array[c])
-        except:
-                if img[c] % 2 == 0:
-                    img[c] -= 1
-                break
-    return img
+	c=-1
+	for pix in img:
+		c += 1
+		try:
+			#print(img[c])
+			if byte_array[c] == '1' and img[c] %2 == 0:
+				# even
+				img[c] -= 1
+			elif byte_array[c] == '0' and img[c] % 2 != 0:
+				# odd
+				img[c] -= 1
+			elif byte_array[c] == ' ' and img[c] % 2 != 0:
+				img[c] -= 1
+			#print(img[c],byte_array[c])
+		except:
+			if img[c] % 2 == 0:
+				img[c] -= 1
+				break
+	return img
 
 def get_byte(a):
     a_bytes = bytes(a, "ascii")
